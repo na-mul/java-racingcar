@@ -18,4 +18,16 @@ public class Game {
 	public int getMoveTryMaxCount() {
 		return moveTryMaxCount;
 	}
+
+	public void tryToMoveAllGameCars() {
+		for (Car gameCar : gameCars) {
+			gameCar.tryToMove();
+		}
+	}
+
+	public void playToEnd() {
+		for (int i = 0; i < moveTryMaxCount; i++) {
+			tryToMoveAllGameCars();
+		}
+	}
 }

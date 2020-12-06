@@ -26,4 +26,32 @@ class GameTest {
 		int moveTryMaxCount = 5;
 		assertThat(new Game(entry, 5).getMoveTryMaxCount()).isEqualTo(5);
 	}
+
+	@DisplayName("tryToMoveAllGameCars : 자동차 게임에 참가한 모든 자동차들의 위치가 1 또는 0 증가하여야 함.")
+	@Test
+	void tryToMoveAllGameCars() {
+		List<Car> entry = Arrays.asList(new Car(), new Car(), new Car());
+		int moveTryMaxCount = 5;
+		Game game = new Game(entry, moveTryMaxCount);
+		game.tryToMoveAllGameCars();
+		assertThat(entry).allSatisfy(car ->
+			assertThat(car.getLocation())
+				.isGreaterThanOrEqualTo(0)
+				.isLessThanOrEqualTo(1)
+		);
+	}
+
+	@DisplayName("playToEnd : 자동차 게임을 끝까지 진행함. 참가한 모든 자동차들은 위치가 0 이상 최대 이동 시도 횟수 이하여여 함. ")
+	@Test
+	void playToEnd() {
+		List<Car> entry = Arrays.asList(new Car(), new Car(), new Car());
+		int moveTryMaxCount = 5;
+		Game game = new Game(entry, moveTryMaxCount);
+		game.playToEnd();
+		assertThat(entry).allSatisfy(car ->
+			assertThat(car.getLocation())
+				.isGreaterThanOrEqualTo(0)
+				.isLessThanOrEqualTo(moveTryMaxCount)
+		);
+	}
 }
