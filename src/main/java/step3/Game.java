@@ -5,6 +5,7 @@ import java.util.List;
 public class Game {
 	private List<Car> gameCars;
 	private int moveTryMaxCount;
+	private int moveTryCurrentCount;
 
 	public Game(List<Car> gameCars, int moveTryMaxCount) {
 		this.gameCars = gameCars;
@@ -25,9 +26,12 @@ public class Game {
 		}
 	}
 
-	public void playToEnd() {
-		for (int i = 0; i < moveTryMaxCount; i++) {
-			tryToMoveAllGameCars();
-		}
+	public boolean isContinue() {
+		return moveTryCurrentCount < moveTryMaxCount;
+	}
+
+	public void play() {
+		tryToMoveAllGameCars();
+		moveTryCurrentCount++;
 	}
 }
